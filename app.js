@@ -17,8 +17,8 @@ const PORT = process.env.PORT || 3000
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-   origin: "*",
-   credentials: true,
+   origin: "http://localhost:5173",
+   credentials: false,
    exposedHeaders: ["set-cookie"]
 }))
 
