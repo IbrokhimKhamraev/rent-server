@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 3000
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-   origin: "https://ijara.netlify.app/rent/customers",
+   origin: "https://ijara.netlify.app",
    credentials: true,
    exposedHeaders: ["set-cookie"]
 }))
