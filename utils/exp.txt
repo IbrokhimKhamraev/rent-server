@@ -1,0 +1,35 @@
+/* do one insert with a Promise so you can await it */
+function doInsert (section, connection) {
+   const values = [section.title, section.content, section.duration];
+   return new Promise( function ( resolve, reject ) {
+      const sql = "INSERT INTO sections (title, content, duration) VALUES (?,?,?);"
+      connection.query (sql, values, function ( error, result ) {
+         if (error) reject (error)
+         resolve (result.insertId)
+      } )
+   } )
+}
+
+/* do all the inserts, awaiting each one */
+async function doInserts (sections, connection) {
+  let ids = []
+  for (let i = 0; i < sections.length; i++) {
+     const id = await doInsert (sections[i], connection) 
+     ids.push(id) 
+  }
+  return ids
+}
+/* handle your post */
+app.post('/saveLesson',function(req, res) {
+  let sections = JSON.parse(req.body.sections)
+  /* get the result back from an async function with .then / .catch */
+  doInserts (sections, connection)
+  .then (function (resultIds) {
+     /* respond with the id values in a JSON object */
+     res.status(200).json(resultIds)
+  } )
+  .catch ( function (error) {
+     /* respond with an error */
+     res.status(500).json(error)
+  } )
+} )
