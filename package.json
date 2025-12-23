@@ -4,7 +4,7 @@
   "description": "server for the Rent api",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "node app.js"
   },
   "author": "Ibrokhim Khamraev",
   "license": "ISC",
