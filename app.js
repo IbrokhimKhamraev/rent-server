@@ -9,7 +9,8 @@ const toolRouters = require("./routes/tools")
 const rentRouters = require("./routes/rent")
 const historyRouters = require("./routes/history")
 const path = require("path")
-const { app, server } = require("./socket")
+
+const app = express()
 
 const PORT = process.env.PORT || 3000
 
@@ -31,4 +32,4 @@ app.use("/api/tools", toolRouters)
 app.use("/api/rent", rentRouters)
 app.use("/api/history", historyRouters)
 
-server.listen(PORT, () => {console.log(`Server running on port: ${PORT},`)})
+app.listen(PORT, () => {console.log(`Server running on port: ${PORT},`)})
