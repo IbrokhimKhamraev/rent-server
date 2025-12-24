@@ -1,6 +1,13 @@
-const io = require("socket.io")(8900, {
+const {Server} = require("socket.io")
+const https = require("https")
+const express = require("express")
+
+const app = express()
+const server = https.createServer(app)
+const io = new Server(server, {
    cors: {
-   origin: "https://ijara.netlify.app"
+      origin: "https://ijara2.netlify.app",
+      credentials: true
    }
 })
 
@@ -16,9 +23,6 @@ const removeUser = (socketId) => {
    users = users.filter(user => user.socketId !== socketId)
 }
 
-const getUser = (userId) => {
-   return users.find(user => user.userId === userId)
-}
 
 const getUsers = (userId) => {
    const filteredUsers = users
@@ -62,4 +66,4 @@ io.on("connection", (socket) => {
 
 })
 
-module.exports = io
+module.exports = {io, app, server}
