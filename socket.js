@@ -6,8 +6,10 @@ const app = express()
 const server = http.createServer(app)
 const io = new Server(server, {
    cors: {
-      origin: "https://ijara2.netlify.app",
-      credentials: true
+      origin: ["https://ijara2.netlify.app"],
+      credentials: true,
+      exposedHeaders: ["set-cookie"],
+      methods: ["GET", "POST"]
    }
 })
 
