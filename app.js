@@ -24,6 +24,10 @@ app.use(cors({
    exposedHeaders: ["set-cookie"]
 }))
 
+app.get("/", (req, res) => {
+   res.json("hello from me!")
+})
+
 app.use("/public", express.static(path.join(__dirname, "public")))
 
 app.use("/api/auth", authRoutes)
