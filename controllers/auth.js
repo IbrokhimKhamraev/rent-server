@@ -56,7 +56,7 @@ const login = (req, res) => {
          const {password, ...others} = data[0]
          res
             .status(200)
-            .cookie("rent_tools", token, {httpOnly: false, sameSite: "none", secure: true, maxAge: 1000 * 60 * 60 * 24 * 180})
+            .cookie("rent_tools", token, {httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 180})
             .json({user: {...others, connectId}, success: true})
       })
    })
@@ -80,7 +80,7 @@ const checkAuth = (req, res) => {
 
       res
          .status(200)
-            .cookie("rent_tools", token, {httpOnly: false, sameSite: "none", secure: true, maxAge: 1000 * 60 * 60 * 24 * 180})
+         .cookie("rent_tools", token, {httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 180})
             .json({user: {...others, connectId}, success: true})
    })
 }

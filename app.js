@@ -11,11 +11,10 @@ const historyRouters = require("./routes/history")
 const path = require("path")
 const { app, server } = require("./socket")
 
-// const app = express()
 
 const PORT = process.env.PORT || 3000
 
-app.use(express.json())
+app.use(express.json({limit: '50mb'}))
 app.use(cookieParser())
 
 app.use(cors({
@@ -26,6 +25,11 @@ app.use(cors({
 
 app.get("/", (req, res) => {
    res.json("hello from me!")
+})
+
+
+app.get("/api/users", (req, res) => {
+   res.json("hello from users!")
 })
 
 app.use("/public", express.static(path.join(__dirname, "public")))
